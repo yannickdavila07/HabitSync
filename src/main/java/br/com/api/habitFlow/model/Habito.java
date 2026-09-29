@@ -1,5 +1,6 @@
 package br.com.api.habitFlow.model;
 
+import br.com.api.habitFlow.dto.DadosCadastroHabito;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -40,6 +41,16 @@ public class Habito {
     //COLOCAR USUARIO AQUI....
 
 
+    //CONTRUTOR - Ele faz os dados coletados no dto se transformar em um objeto Habito
+    public Habito(DadosCadastroHabito dados){
+        this.name = dados.name();
+        this.description = dados.description();
+        this.frequency = dados.frequency();
+        this.target = dados.target();
+        this.unit = dados.unit();
+        this.active = true;
+        this.createAt = LocalDateTime.now();
+    }
 
 
 
