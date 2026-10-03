@@ -41,4 +41,10 @@ public class HabitoController {
         return ResponseEntity.ok().body(habito);
     }
 
+    @PatchMapping("/{id}/{validador}")
+    @Transactional
+    public ResponseEntity alterarHabito(@PathVariable Long id, @PathVariable String validador){
+        service.alterarHabito(id, validador);
+        return ResponseEntity.noContent().build();
+    }
 }

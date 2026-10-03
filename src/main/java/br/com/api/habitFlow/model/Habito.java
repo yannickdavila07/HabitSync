@@ -63,5 +63,11 @@ public class Habito {
     }
 
 
+    public void desativarHabito() {
+        this.active = false;
+    }
 
+    public void ativarHabito() {
+        this.active = true;
+    }
 }

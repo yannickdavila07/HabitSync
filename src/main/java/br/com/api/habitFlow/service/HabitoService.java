@@ -32,4 +32,15 @@ public class HabitoService {
         habito.atualizarInformacoes(dados);
         return new DadosDetalhamentoHabito(habito);
     }
+
+    public void alterarHabito(Long id, String validador) {
+        var habito = habitoRepository.findById(id).get();
+        if (validador.equals("desativar")){
+            habito.desativarHabito();
+        }
+        if (validador.equals("ativar")){
+            habito.ativarHabito();
+        }
+        
+    }
 }
