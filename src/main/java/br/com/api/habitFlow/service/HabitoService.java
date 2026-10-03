@@ -41,6 +41,11 @@ public class HabitoService {
         if (validador.equals("ativar")){
             habito.ativarHabito();
         }
-        
+
+    }
+
+    public void deletarHabito(Long id) {
+        var habito = habitoRepository.findById(id).get();
+        habitoRepository.delete(habito);
     }
 }

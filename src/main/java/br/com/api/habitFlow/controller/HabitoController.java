@@ -47,4 +47,13 @@ public class HabitoController {
         service.alterarHabito(id, validador);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deletarHabito(@PathVariable Long id){
+        service.deletarHabito(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }
