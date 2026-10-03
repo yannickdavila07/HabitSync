@@ -4,6 +4,7 @@ import br.com.api.habitFlow.dto.DadosAtualizacaoHabito;
 import br.com.api.habitFlow.dto.DadosCadastroHabito;
 import br.com.api.habitFlow.dto.DadosDetalhamentoHabito;
 import br.com.api.habitFlow.dto.DadosListagemHabito;
+import br.com.api.habitFlow.model.Frequency;
 import br.com.api.habitFlow.service.HabitoService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
-@RestController()
+@RestController
 @RequestMapping("/habitos")
 public class HabitoController {
 
@@ -29,8 +30,8 @@ public class HabitoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DadosListagemHabito>> listarHabitos(){
-        var habitos = service.listarHabitos();
+    public ResponseEntity<List<DadosListagemHabito>> listarHabitos(@RequestParam(required = false)Frequency frequency, @RequestParam(required = false) Boolean active){
+        var habitos = service.listarHabitos(frequency, active);
         return ResponseEntity.ok().body(habitos);
     }
 
