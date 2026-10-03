@@ -1,5 +1,6 @@
 package br.com.api.habitFlow.controller;
 
+import br.com.api.habitFlow.dto.DadosAtualizacaoHabito;
 import br.com.api.habitFlow.dto.DadosCadastroHabito;
 import br.com.api.habitFlow.dto.DadosDetalhamentoHabito;
 import br.com.api.habitFlow.dto.DadosListagemHabito;
@@ -31,6 +32,13 @@ public class HabitoController {
     public ResponseEntity<List<DadosListagemHabito>> listarHabitos(){
         var habitos = service.listarHabitos();
         return ResponseEntity.ok().body(habitos);
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity<DadosDetalhamentoHabito> atualizarHabito(@RequestBody DadosAtualizacaoHabito dados){
+        var habito = service.atualizarHabito(dados);
+        return ResponseEntity.ok().body(habito);
     }
 
 }

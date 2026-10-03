@@ -1,5 +1,6 @@
 package br.com.api.habitFlow.model;
 
+import br.com.api.habitFlow.dto.DadosAtualizacaoHabito;
 import br.com.api.habitFlow.dto.DadosCadastroHabito;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -50,6 +51,15 @@ public class Habito {
         this.unit = dados.unit();
         this.active = true;
         this.createAt = LocalDateTime.now();
+    }
+
+    public void atualizarInformacoes(DadosAtualizacaoHabito dados){
+        this.name = dados.name();
+        this.description = dados.description();
+        this.frequency = dados.frequency();
+        this.target = dados.target();
+        this.unit  = dados.unit();
+
     }
 
 

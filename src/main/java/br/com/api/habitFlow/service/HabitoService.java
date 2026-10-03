@@ -1,5 +1,6 @@
 package br.com.api.habitFlow.service;
 
+import br.com.api.habitFlow.dto.DadosAtualizacaoHabito;
 import br.com.api.habitFlow.dto.DadosCadastroHabito;
 import br.com.api.habitFlow.dto.DadosDetalhamentoHabito;
 import br.com.api.habitFlow.dto.DadosListagemHabito;
@@ -24,5 +25,11 @@ public class HabitoService {
     public List<DadosListagemHabito> listarHabitos() {
         List<Habito> listaHabitos = habitoRepository.findAll();
         return listaHabitos.stream().map(habito -> new DadosListagemHabito(habito)).toList();
+    }
+
+    public DadosDetalhamentoHabito atualizarHabito(DadosAtualizacaoHabito dados) {
+        var habito = habitoRepository.findById(dados.id()).get();
+        habito.atualizarInformacoes(dados);
+        return new DadosDetalhamentoHabito(habito);
     }
 }
