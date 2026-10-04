@@ -32,6 +32,8 @@ public class User implements UserDetails {
 
     private Boolean active;
 
+    private Boolean verify;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
