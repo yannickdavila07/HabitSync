@@ -5,15 +5,13 @@ import br.com.api.habitFlow.dto.DadosCadastroHabito;
 import br.com.api.habitFlow.dto.DadosDetalhamentoHabito;
 import br.com.api.habitFlow.dto.DadosListagemHabito;
 import br.com.api.habitFlow.infra.exception.ValidationException;
-import br.com.api.habitFlow.model.Frequency;
-import br.com.api.habitFlow.model.Habito;
+import br.com.api.habitFlow.model.habito.Frequency;
+import br.com.api.habitFlow.model.habito.Habito;
 import br.com.api.habitFlow.repository.HabitoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class HabitoService {

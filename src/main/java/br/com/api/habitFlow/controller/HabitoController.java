@@ -4,7 +4,7 @@ import br.com.api.habitFlow.dto.DadosAtualizacaoHabito;
 import br.com.api.habitFlow.dto.DadosCadastroHabito;
 import br.com.api.habitFlow.dto.DadosDetalhamentoHabito;
 import br.com.api.habitFlow.dto.DadosListagemHabito;
-import br.com.api.habitFlow.model.Frequency;
+import br.com.api.habitFlow.model.habito.Frequency;
 import br.com.api.habitFlow.service.HabitoService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package br.com.api.habitFlow.dto;
 
-import br.com.api.habitFlow.model.Frequency;
-import br.com.api.habitFlow.model.Unit;
+import br.com.api.habitFlow.model.habito.Frequency;
+import br.com.api.habitFlow.model.habito.Unit;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

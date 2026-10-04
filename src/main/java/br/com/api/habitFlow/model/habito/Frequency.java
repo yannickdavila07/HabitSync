@@ -1,4 +1,4 @@
-package br.com.api.habitFlow.model;
+package br.com.api.habitFlow.model.habito;
 
 public enum Frequency {
     DAILY,

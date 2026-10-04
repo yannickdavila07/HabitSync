@@ -1,4 +1,4 @@
-package br.com.api.habitFlow.model;
+package br.com.api.habitFlow.model.habito;
 
 import br.com.api.habitFlow.dto.DadosAtualizacaoHabito;
 import br.com.api.habitFlow.dto.DadosCadastroHabito;

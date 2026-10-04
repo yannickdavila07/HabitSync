@@ -1,8 +1,8 @@
 package br.com.api.habitFlow.repository;
 
 
-import br.com.api.habitFlow.model.Frequency;
-import br.com.api.habitFlow.model.Habito;
+import br.com.api.habitFlow.model.habito.Frequency;
+import br.com.api.habitFlow.model.habito.Habito;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

@@ -1,8 +1,8 @@
 package br.com.api.habitFlow.dto;
 
-import br.com.api.habitFlow.model.Frequency;
-import br.com.api.habitFlow.model.Habito;
-import br.com.api.habitFlow.model.Unit;
+import br.com.api.habitFlow.model.habito.Frequency;
+import br.com.api.habitFlow.model.habito.Habito;
+import br.com.api.habitFlow.model.habito.Unit;
 
 import java.time.LocalDateTime;
 
