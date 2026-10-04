@@ -49,4 +49,9 @@ public class HabitoService {
         var habito = habitoRepository.findById(id).get();
         habitoRepository.delete(habito);
     }
+
+    public DadosDetalhamentoHabito listarHabitoPorId(Long id) {
+        var habito = habitoRepository.findById(id).get();
+        return new DadosDetalhamentoHabito(habito);
+    }
 }

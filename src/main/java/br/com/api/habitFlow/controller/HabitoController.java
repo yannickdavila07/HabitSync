@@ -29,6 +29,12 @@ public class HabitoController {
         return ResponseEntity.created(uri).body(habito);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DadosDetalhamentoHabito> listarHabitoPorId(@PathVariable Long id){
+        var habito = service.listarHabitoPorId(id);
+        return ResponseEntity.ok().body(habito);
+    }
+
     @GetMapping
     public ResponseEntity<List<DadosListagemHabito>> listarHabitos(@RequestParam(required = false)Frequency frequency, @RequestParam(required = false) Boolean active){
         var habitos = service.listarHabitos(frequency, active);
