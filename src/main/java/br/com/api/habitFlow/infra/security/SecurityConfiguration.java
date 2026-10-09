@@ -1,6 +1,5 @@
 package br.com.api.habitFlow.infra.security;
 
-import br.com.api.habitFlow.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,14 +17,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+    @Autowired
+    private FilterToken filterToken;
+
     @Bean
     public SecurityFilterChain configSeguranca(HttpSecurity http){
         return http.csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
-                    req.requestMatchers("/login").permitAll();
+                    req.requestMatchers("/login", "/login/refresh").permitAll();
                     req.anyRequest().authenticated();
                 })
+                .addFilterBefore(filterToken, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
