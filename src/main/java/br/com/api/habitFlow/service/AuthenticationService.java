@@ -1,6 +1,7 @@
 package br.com.api.habitFlow.service;
 
 import br.com.api.habitFlow.dto.DadosLogin;
+import br.com.api.habitFlow.dto.DadosRefreshToken;
 import br.com.api.habitFlow.dto.DadosToken;
 import br.com.api.habitFlow.model.user.User;
 import br.com.api.habitFlow.repository.UserRepository;
@@ -31,5 +32,13 @@ public class AuthenticationService {
     }
 
 
+    public DadosToken gerarPeloRefreshToken(DadosRefreshToken dados) {
+        var dadosRefresh = dados.refreshToken();
+        var email = tokenService.validarToken(dadosRefresh);
+        User usuario = userRepository.encontrarPeloEmail(email).orElseThrow( () -> new SecurityException("Usuário não encontrado!"));
 
+        var token = tokenService.gerarToken(usuario);
+        var refreshToken = tokenService.gerarRefreshToken(usuario);
+        return new DadosToken(token, refreshToken);
+    }
 }
