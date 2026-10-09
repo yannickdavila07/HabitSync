@@ -7,6 +7,7 @@ import br.com.api.habitFlow.dto.DadosListagemHabito;
 import br.com.api.habitFlow.infra.exception.ValidationException;
 import br.com.api.habitFlow.model.habito.Frequency;
 import br.com.api.habitFlow.model.habito.Habito;
+import br.com.api.habitFlow.model.user.User;
 import br.com.api.habitFlow.repository.HabitoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,26 +19,32 @@ public class HabitoService {
     @Autowired
     private HabitoRepository habitoRepository;
 
-    public DadosDetalhamentoHabito cadastrarHabito(DadosCadastroHabito dados){
-        var habito = new Habito(dados);
+    public DadosDetalhamentoHabito cadastrarHabito(DadosCadastroHabito dados, User user){
+        var habito = new Habito(dados, user);
         habitoRepository.save(habito);
         return new DadosDetalhamentoHabito(habito);
     }
 
-    public List<DadosListagemHabito> listarHabitos(Frequency frequency, Boolean active) {
-        List<Habito> listaHabitos = habitoRepository.encontrarPersonalizado(frequency, active);
+    public List<DadosListagemHabito> listarHabitos(Frequency frequency, Boolean active, User user) {
+        List<Habito> listaHabitos = habitoRepository.encontrarPersonalizado(frequency, active, user);
         return listaHabitos.stream().map(DadosListagemHabito::new).toList();
     }
 
-    public DadosDetalhamentoHabito atualizarHabito(DadosAtualizacaoHabito dados) {
+    public DadosDetalhamentoHabito atualizarHabito(DadosAtualizacaoHabito dados, User user) {
         var habito = habitoRepository.findById(dados.id())
                 .orElseThrow( () -> new ValidationException("Hábito não encontrado!"));
+        if (habito.getUser() != user){
+            throw new ValidationException("Erro ao atualizar o hábito");
+        }
         habito.atualizarInformacoes(dados);
         return new DadosDetalhamentoHabito(habito);
     }
 
-    public void alterarHabito(Long id, String validador) {
+    public void alterarHabito(Long id, String validador, User user) {
         var habito = habitoRepository.findById(id).orElseThrow(() -> new ValidationException("Hábito não encontrado"));
+        if (habito.getUser() != user){
+            throw new ValidationException("Erro ao alterar a atividade o hábito!");
+        }
         if (validador.equals("desativar")){
             habito.desativarHabito();
         }
@@ -47,13 +54,16 @@ public class HabitoService {
 
     }
 
-    public void deletarHabito(Long id) {
+    public void deletarHabito(Long id, User user) {
         var habito = habitoRepository.findById(id).orElseThrow(() -> new ValidationException("Hábito não encontrado"));
+        if (habito.getUser() != user){
+            throw new ValidationException("Erro ao deletar o Habito!");
+        }
         habitoRepository.delete(habito);
     }
 
-    public DadosDetalhamentoHabito listarHabitoPorId(Long id) {
-        var habito = habitoRepository.findById(id).orElseThrow(() -> new ValidationException("Hábito não encontrado!"));
+    public DadosDetalhamentoHabito listarHabitoPorId(Long id, User user) {
+        var habito = habitoRepository.listarHabito(id, user).orElseThrow(() -> new ValidationException("Hábito não encontrado!"));
         return new DadosDetalhamentoHabito(habito);
     }
 }

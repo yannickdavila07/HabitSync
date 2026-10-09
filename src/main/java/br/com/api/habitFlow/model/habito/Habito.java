@@ -2,6 +2,7 @@ package br.com.api.habitFlow.model.habito;
 
 import br.com.api.habitFlow.dto.DadosAtualizacaoHabito;
 import br.com.api.habitFlow.dto.DadosCadastroHabito;
+import br.com.api.habitFlow.model.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -39,11 +40,13 @@ public class Habito {
 
     private LocalDateTime createAt;
 
-    //COLOCAR USUARIO AQUI....
+    // @ManyToOne() - Aqui eu quero dizer que varios Habitos podem ter 1 usuario e relacionando essas duas tabelas
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
 
     //CONTRUTOR - Ele faz os dados coletados no dto se transformar em um objeto Habito
-    public Habito(DadosCadastroHabito dados){
+    public Habito(DadosCadastroHabito dados, User user){
         this.name = dados.name();
         this.description = dados.description();
         this.frequency = dados.frequency();
@@ -51,6 +54,7 @@ public class Habito {
         this.unit = dados.unit();
         this.active = true;
         this.createAt = LocalDateTime.now();
+        this.user = user;
     }
 
     public void atualizarInformacoes(DadosAtualizacaoHabito dados){

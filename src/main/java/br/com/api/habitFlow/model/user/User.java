@@ -9,6 +9,7 @@ import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -33,6 +34,10 @@ public class User implements UserDetails {
     private Boolean active;
 
     private Boolean verify;
+
+    private String codigoVerificacao;
+
+    private LocalDateTime codigoExpiracao;
 
 
     @Override
