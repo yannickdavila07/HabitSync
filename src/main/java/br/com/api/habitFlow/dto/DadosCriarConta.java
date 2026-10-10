@@ -1,4 +1,15 @@
 package br.com.api.habitFlow.dto;
 
-public record DadosCriarConta() {
+import jakarta.validation.constraints.NotBlank;
+
+public record DadosCriarConta(
+        @NotBlank
+        String nomeUsuario,
+        @NotBlank
+        String nomeCompleto,
+        @NotBlank
+        String email,
+        @NotBlank
+        String senha
+) {
 }
